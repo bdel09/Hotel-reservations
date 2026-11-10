@@ -8,6 +8,8 @@ public class Employee {
     private double TotalPay = payRate * hoursWorked;
     private float OvertimeHours;
     private float regularHours = hoursWorked - OvertimeHours;
+    //Sdding new time varaible
+    int time;
 
     //Create the employee class to store and calculate this info
     public Employee(String name, int hoursWorked, String employeeId, String department, double payRate) {
@@ -62,8 +64,24 @@ public class Employee {
     //Inlcude derived getters:
     //getTotalPay()
     public float getregularHours() {
-        return regularHours;
-
+        return regularHours;}
+    //Modify the employee class to add punchin and punchout methods
+    //Re: punchiin, with each tme we punch in, we track their start time
+    //So with each declaration of a certain varaible(s): (name , employeeid, department)
+    //we record their start time (time; a new inetger variable) possibly returning their start time via the punchin method
+    //
+    public int punchIn(int time) {
+        if (time < 0 || time > 24) {
+            System.out.print("Please input a time within 0 and 24 hrs.");
+        }
+        return time;
+    }
+    public int punchOut(int time) {
+        if (time < 0 || time > 24) {
+            System.out.println("Please input a time within 0 and 24 hrs.");
+            System.out.println("Be sure that your punchout time does noot conflict with the time of your arrival.");
+        }
+        return time;
     }
 }
 
