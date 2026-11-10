@@ -11,9 +11,7 @@ public class Room {
         Occupied = this.Occupied;
         Dirty = this.Dirty;
         Availble = this.Availble;
-
     }
-
     //Creating the getters
     public int getNumberOfBeds(){
         return NumberOfBeds;
@@ -29,7 +27,6 @@ public class Room {
     public boolean isAvailble() {
         return Dirty || Occupied;
     }
-
 //part 2: modify room class to add checkin(), checkout(), and cleanRoom() methods
 //Describing the checkin; marked occupied and dirty
     public void checkin() {

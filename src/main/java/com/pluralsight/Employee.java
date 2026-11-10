@@ -1,4 +1,5 @@
 package com.pluralsight;
+import java.time.LocalTime;
 
 public class Employee {
     //Include variables: hoursworked, name, employeeID, Department, payrate
@@ -71,21 +72,45 @@ public class Employee {
     //we record their start time (time; a new inetger variable) possibly returning their start time via the punchin method
     //
     public int punchIn(int time) {
+
         if (time < 0 || time > 24) {
             System.out.print("Please input a time within 0 and 24 hrs.");
             //Added to the regularhourrs
         }
         return time;
     }
+
+
+    public String punchIn() {
+        LocalTime ahora = LocalTime.now();
+        int hrs = ahora.getHour();
+        int min = ahora.getMinute();
+        String HM = "hrs" + "min";
+         return HM;}
     public int punchOut(int time) {
         if (time < 0 || time > 24) {
             System.out.println("Please input a time within 0 and 24 hrs.");
-
             System.out.println("Be sure that your punchout time does noot conflict with the time of your arrival.");
-            time = (int) (time + getRegularHours());
-        }
-        return time;
-    }
+            time = (int) (time + getRegularHours());}
+        return time;}
+    public String punchOut() {
+        LocalTime ahora = LocalTime.now();
+        int hrs = ahora.getHour();
+        int min = ahora.getMinute();
+        String HM = "hrs" + "min";
+        return HM;}
+
+
+
+
+    //Create overloaded methods for punchIn() and punchOut()
+    //By overlaoded methods: imagine a function for which the co-domain consists of a name, the domain methods.
+    //the cardinality of the domain vastly exceeds the co-domain
+    //condition: ensure that their params lists differ
+    //Applications: brevity ig
+    //Here, our overloaded methods can't incorporate paramerters but are able to determine the hour and minute
+    //So, the LocalDateTime is needed
+
 }
 
 
