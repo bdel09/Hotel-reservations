@@ -1,5 +1,5 @@
 package com.pluralsight;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 public class Employee {
     //Include variables: hoursworked, name, employeeID, Department, payrate
@@ -81,24 +81,26 @@ public class Employee {
     }
 
 
-    public String punchIn() {
-        LocalTime ahora = LocalTime.now();
-        int hrs = ahora.getHour();
-        int min = ahora.getMinute();
-        String HM = "hrs" + "min";
-         return HM;}
+    public LocalDateTime punchIn() {
+        LocalDateTime ahora = LocalDateTime.now();
+        return ahora;
+    }
+    //maybe make this a setter?
+
     public int punchOut(int time) {
         if (time < 0 || time > 24) {
             System.out.println("Please input a time within 0 and 24 hrs.");
             System.out.println("Be sure that your punchout time does noot conflict with the time of your arrival.");
             time = (int) (time + getRegularHours());}
         return time;}
-    public String punchOut() {
-        LocalTime ahora = LocalTime.now();
-        int hrs = ahora.getHour();
-        int min = ahora.getMinute();
-        String HM = "hrs" + "min";
-        return HM;}
+    public LocalDateTime punchOut() {
+        LocalDateTime luego = LocalDateTime.now();
+        if (luego.isBefore(punchIn())) {
+            System.out.println("Error! Time of clock out is behind clock in!");
+        }
+        return luego;
+    }
+
 
 
 
