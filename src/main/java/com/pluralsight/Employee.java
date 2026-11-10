@@ -73,13 +73,16 @@ public class Employee {
     public int punchIn(int time) {
         if (time < 0 || time > 24) {
             System.out.print("Please input a time within 0 and 24 hrs.");
+            //Added to the regularhourrs
         }
         return time;
     }
     public int punchOut(int time) {
         if (time < 0 || time > 24) {
             System.out.println("Please input a time within 0 and 24 hrs.");
+
             System.out.println("Be sure that your punchout time does noot conflict with the time of your arrival.");
+            time = (int) (time + getRegularHours());
         }
         return time;
     }
