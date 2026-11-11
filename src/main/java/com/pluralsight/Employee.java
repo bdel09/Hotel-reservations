@@ -4,13 +4,14 @@ import java.time.LocalDateTime;
 public class Employee {
     //Include variables: hoursworked, name, employeeID, Department, payrate
     private String name, employeeId, department;
-    private int hoursWorked;
+    private int hoursWorked;//Describes weekly hours
     private double payRate;
     private double TotalPay = payRate * hoursWorked;
-    private float OvertimeHours;
-    private float regularHours = hoursWorked - OvertimeHours;
+    private int OvertimeHours;
+    private int regularHours = 0;
     //Sdding new time varaible
-    int time;
+    private int time_out;
+    private int time_in;
 
     //Create the employee class to store and calculate this info
     public Employee(String name, int hoursWorked, String employeeId, String department, double payRate) {
@@ -22,26 +23,18 @@ public class Employee {
     }
 
     //Derived getters
-    public float getHoursWorked() {
+    public int getHoursWorked() {
         return this.hoursWorked;
     }
-
     public double getTotalPay() {
-        this.TotalPay = this.payRate * this.hoursWorked;
-        return this.TotalPay;
-    }
-
-    public float getOvertimeHours() {
+        return TotalPay;}
+    public int getOvertimeHours() {
         if (this.hoursWorked > 40) {
-            float OvertimeHours = this.hoursWorked - 40;
-            System.out.println("Overtime Hours worked: " + OvertimeHours);
-            System.out.println("Total Pay is: " + this.TotalPay);
-        } else {
-            System.out.println("No overtime.");
+            int OvertimeHours = this.hoursWorked - 40;
+            return OvertimeHours;
         }
-        return OvertimeHours;
+        return 0; //like how we terminate in cpp
     }
-
     public String getName() {
         return name;
     }
@@ -54,50 +47,54 @@ public class Employee {
         return department;
     }
 
-    public double getPayRate() {
+    public double getpayRate() {
         return payRate;
     }
-
-    public float getRegularHours() {
+    public float getregularHours() {
         return regularHours;
     }
 
+
     //Inlcude derived getters:
     //getTotalPay()
-    public float getregularHours() {
-        return regularHours;}
     //Modify the employee class to add punchin and punchout methods
     //Re: punchiin, with each tme we punch in, we track their start time
     //So with each declaration of a certain varaible(s): (name , employeeid, department)
     //we record their start time (time; a new inetger variable) possibly returning their start time via the punchin method
     //
-    public int punchIn(int time) {
-
-        if (time < 0 || time > 24) {
+    public int punchIn(int time_in) {
+        if (time_in < 0 || time_in > 24) {
             System.out.print("Please input a time within 0 and 24 hrs.");
             //Added to the regularhourrs
+            throw new IllegalArgumentException("Try Again!");
         }
-        return time;
+        this.time_in = time_in;
+        return this.time_in;
     }
 
 
     public LocalDateTime punchIn() {
-        LocalDateTime ahora = LocalDateTime.now();
-        return ahora;
+        //store the punchi-in timestamp as an instance
+        return LocalDateTime.now();
     }
     //maybe make this a setter?
 
-    public int punchOut(int time) {
-        if (time < 0 || time > 24) {
-            System.out.println("Please input a time within 0 and 24 hrs.");
-            System.out.println("Be sure that your punchout time does noot conflict with the time of your arrival.");
-            time = (int) (time + getRegularHours());}
-        return time;}
+    public int punchOut(int time_out) {
+        if (time_out < 0 || time_out > 24) {
+            System.out.println("Please input a time_out within 0 and 24 hrs.");
+            System.out.println("Be sure that your punchout time_out does noot conflict with the time_out of your arrival.");
+            throw new IllegalArgumentException("Input anew!");
+        }
+            time_out = this.time_out;
+        this.hoursWorked = this.time_out - this.time_in;
+        return this.hoursWorked;}
+
     public LocalDateTime punchOut() {
         LocalDateTime luego = LocalDateTime.now();
         if (luego.isBefore(punchIn())) {
-            System.out.println("Error! Time of clock out is behind clock in!");
+            throw new IllegalArgumentException("Error! Time of clock-out is behind clock in!");
         }
+        //compare time and date:
         return luego;
     }
 
